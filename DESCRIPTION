@@ -1,12 +1,9 @@
-Package: BuildABiocWorkshop
-Title: Bioconductor Workshop Template and Github Actions
+Package: systemPipeWorkshop2021
+Title: systemPipeR Workshop
 Version: 0.9.0
-Authors@R: 
-    person(given = "Sean",
-           family = "Davis",
-           role = c("aut", "cre"),
-           email = "seandavi@gmail.com",
-           comment = c(ORCID = "your-orc-id-here"))
+Authors@R: c(
+    person(given = "Daniela", family = "Cassol", role = c("aut", "cre"), email="danicassol@gmail.com"), 
+    person(given = "Thomas", family = "Girke", role = c("aut")))
 Description: This package serves as a template for using github actions to 
     prepare a Bioconductor Workshop package for use. In particular,
     a pkgdown website and docker image are generated based on workflow 
@@ -22,7 +19,7 @@ Suggests:
     knitr,
     rmarkdown,
     pkgdown
-URL: https://seandavi.github.io/BuildABiocWorkshop/
-BugReports: https://github.com/seandavi/BuildABiocWorkshop/issues/new/choose
+URL: https://dcassol.github.io/systemPipeWorkshop2021/
+BugReports: https://github.com/dcassol/systemPipeWorkshop2021/issues/new/choose
 VignetteBuilder: knitr
-DockerImage: seandavi/buildabiocworkshop:latest
+DockerImage: dcassol/systemPipeWorkshop2021:latest
