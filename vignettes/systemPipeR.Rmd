@@ -3,7 +3,7 @@ title: "*systemPipeR*"
 author: Daniela Cassol and Thomas Girke
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{An Example Workshop}
+  %\VignetteIndexEntry{systemPipeR}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
