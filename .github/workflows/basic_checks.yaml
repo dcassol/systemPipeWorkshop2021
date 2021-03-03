@@ -2,7 +2,7 @@ on: [push]
 jobs:
   job1:
     runs-on: ubuntu-latest
-    container: bioconductor/bioconductor_docker:bioc2020
+    container: bioconductor/bioconductor_docker:devel
     steps:
       - uses: actions/checkout@v1
 
@@ -29,11 +29,11 @@ jobs:
           Rscript -e "remotes::install_github('r-hub/sysreqs')"
           sysreqs=$(Rscript -e "cat(sysreqs::sysreq_commands('DESCRIPTION'))")
           sudo -s eval "$sysreqs"
-          sudo apt install libharfbuzz-dev 
-          sudo apt install libfribidi-dev 
           
       - name: Install dependencies
         run: |
+          options(repos = c(CRAN = "https://cran.r-project.org"))
+          BiocManager::repositories()
           remotes::install_deps(dependencies = TRUE, repos = BiocManager::repositories())
           remotes::install_cran("rcmdcheck")
         shell: Rscript {0}
@@ -51,7 +51,7 @@ jobs:
           repository: dcassol/systempipeworkshop2021
           tag_with_ref: true
           tag_with_sha: true
-          tags: biox2021
+          tags: latest
 
       - name: Build pkgdown
         run: |
