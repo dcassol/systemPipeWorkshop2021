@@ -1,5 +1,4 @@
-on: [push, pull_request]
-
+on: [push]
 jobs:
   job1:
     runs-on: ubuntu-latest
@@ -7,11 +6,9 @@ jobs:
     steps:
       - uses: actions/checkout@v1
 
-      - name: Query dependencies and update old packages
+      - name: Query dependencies
         run: |
           install.packages('remotes')
-          options(repos = c(CRAN = 'https://cran.r-project.org'))
-          BiocManager::install(ask=FALSE)
           saveRDS(remotes::dev_package_deps(dependencies = TRUE), ".github/depends.Rds", version = 2)
         shell: Rscript {0}
         
@@ -20,8 +17,8 @@ jobs:
         uses: actions/cache@v1
         with:
           path: /usr/local/lib/R/site-library
-          key: ${{ env.cache-version }}-${{ runner.os }}-r-${{ hashFiles('.github/depends.Rds') }}
-          restore-keys: ${{ env.cache-version }}-${{ runner.os }}-r-
+          key: ${{ runner.os }}-r-1-${{ hashFiles('.github/depends.Rds') }}
+          restore-keys: ${{ runner.os }}-r-1-
 
       # This lets us augment with additional dependencies
       - name: Install system dependencies
@@ -35,8 +32,6 @@ jobs:
           
       - name: Install dependencies
         run: |
-          options(repos = c(CRAN = "https://cran.r-project.org"))
-          BiocManager::repositories()
           remotes::install_deps(dependencies = TRUE, repos = BiocManager::repositories())
           remotes::install_cran("rcmdcheck")
         shell: Rscript {0}
@@ -46,7 +41,15 @@ jobs:
           _R_CHECK_CRAN_INCOMING_REMOTE_: false
         run: rcmdcheck::rcmdcheck(args = c("--no-manual"), error_on = "warning", check_dir = "check")
         shell: Rscript {0}
-      
+        
+      - uses: docker/build-push-action@v1
+        with:
+          username: ${{ secrets.DOCKER_HUB_USERNAME }}
+          password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
+          repository: dcassol/systempipeworkshop2021
+          tag_with_ref: true
+          tag_with_sha: true
+          tags: biox2021
 
       - name: Build pkgdown
         run: |
@@ -57,15 +60,6 @@ jobs:
         run: |
           apt-get update
           apt-get -y install rsync
-
-     - uses: docker/build-push-action@v1
-       with:
-         username: ${{ secrets.DOCKER_USERNAME }}
-         password: ${{ secrets.DOCKER_PASSWORD }}
-         repository: dcassol/systempipeworkshop2021
-         tag_with_ref: true
-         tag_with_sha: true
-         tags: bioc2021
 
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@releases/v3
