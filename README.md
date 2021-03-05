@@ -2,11 +2,7 @@
 [![.github/workflows/basic_checks.yaml](https://github.com/dcassol/systemPipeWorkshop2021/actions/workflows/basic_checks.yaml/badge.svg)](https://github.com/dcassol/systemPipeWorkshop2021/actions/workflows/basic_checks.yaml)
 <!-- badges: end -->
 
-# systemPipeR <img src="https://raw.githubusercontent.com/systemPipeR/systemPipeR.github.io/main/static/images/systemPipeR.png" align="right" width="240" height="278">
-
-# Instructor(s) name(s) and contact information
-
-- Daniela Cassol (danicassol@gmail.com)
+# systemPipeR Workshop <img src="https://raw.githubusercontent.com/systemPipeR/systemPipeR.github.io/main/static/images/systemPipeR.png" align="right" width="240" height="278">
 
 # Key resources
 

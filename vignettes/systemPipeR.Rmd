@@ -1,9 +1,9 @@
 ---
-title: "*systemPipeR*"
+title: "_systemPipeR_ Workshop"
 author: Daniela Cassol and Thomas Girke
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{systemPipeR}
+  %\VignetteIndexEntry{_systemPipeR_ Workshop}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -16,7 +16,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-# Workshop Title
+# systemPipeR: a generic workflow design and reporting environment for analyzing large-scale omics data in R with built-in support for command-line software
 
 **Authors**:
     Daniela Cassol (danielac@ucr.edu),
@@ -24,89 +24,77 @@ knitr::opts_chunk$set(
     
 **Institution**: Institute for Integrative Genome Biology, University of California, Riverside, California, USA.
 
-**Last modified**: 2 March, 2021.
+**Last modified**: 4 March, 2021.
 
 ## Overview
 
 ### Description
 
-Along with the topic of your workshop, include how students can expect
-to spend their time. For the description may also include information
-about what type of workshop it is (e.g. instructor-led live demo, lab,
-lecture + lab, etc.). Instructors are strongly recommended to provide
-completely worked examples for lab sessions, and a set of stand-alone
-notes that can be read and understood outside of the workshop.
+ This workshop demonstrates the use of the _systemPipeR_ package, focusing on the project's major enhancements. _systemPipeR_ establishes a versatile environment for designing, building, and running end-to-end analysis workflows on local machines, HPC clusters, and cloud systems while generating at the same time publication-quality analysis reports. The package offers sufficient flexibility to choose each step in a workflow the optimal R or command-line software, customize the pre-configured workflow templates, and design entirely new ones while taking advantage of central community S4 classes Bioconductor ecosystem. _systemPipeR_ new features allow users to visualize workflow designs in different graphical layouts, execute workflows step-wise or entirely from within R or other languages (e.g., Bash), monitor their run status while tracking all metadata associated with a project, and subsequently generate both scientific and technical status reports. The introduction of the workshop will provide an overview of systemPipeR's command-line interface based on CWL (Common Workflow Language), as well as the new workflow control class (S4) added to the _systemPipeR_ package, allowing users to execute single or any number of complex workflow steps with a single R command, such as `runWF(args[1:3])`. Simultaneously, the hand-on components will cover the basic usage of a pre-configured workflow template provided by the _systemPipeRdata_ package and the customization and demonstration of the construction of new workflows. A short use-case demonstration will guide users through a basic small-RNA-Seq profiling workflow that will include reading mappings with variable parameter settings of two popular short-read aligners (HISAT2 and STAR), read quantification and statistical analyses steps as well as automation routines for running NGS workflows from start to finish with a single command. The last part will demonstrate how to parallelize the analysis of relatively large NGS data sets on multiple CPU cores of single machines as well as computer clusters with a scheduler (e.g., Slurm).
+
+> **_Dani note::_** 
+Do you think we should add a demonstration of systemPipeShiny here?
 
 ### Pre-requisites
 
-List any workshop prerequisites, for example:
+  * Basic knowledge of R and usage of Bioconductor packages for NGS analysis
+  * Basic knowledge of running command-line software
+  * Basic knowledge of parallelization concepts
 
-* Basic knowledge of R syntax
-* Familiarity with the GenomicRanges class
-* Familiarity with xyz vignette (provide link)
+Non-essential background reading:
 
-List relevant background reading for the workshop, including any
-theoretical background you expect students to have.
+  * [systemPipeR vignette](https://bioconductor.org/packages/devel/bioc/html/systemPipeR.html)
+  * [systemPipeRdata vignette](http://bioconductor.org/packages/devel/data/experiment/html/systemPipeRdata.html)
+  * [R Markdown tutorial](https://rmarkdown.rstudio.com/lesson-2.html)
 
-* List any textbooks, papers, or other reading that students should be
-  familiar with. Include direct links where possible.
+### Workshop Participation
 
-### Participation
+Participants will be able to perform all analysis components of this workshop hands-on. Active user participation throughout the event is highly encouraged including but not limited to lecture material, hands-on sections and final discussion about package improvements. Participants are encouraged to ask questions at any time during the workshop. 
 
-Describe how students will be expected to participate in the workshop.
+> **_Dani note::_** 
+In the 2019 proposal, we added a note saying that the parallelization will be only a demonstration, but now the entire workshop is provided in a docker container, so I believe we can install slurm into the container. 
+Here is the note: "Most likely, the final computer cluster example will be demonstrated by the presenter rather than performed by all participants, because the AMI instances provided during the conference are unlikely to provide cluster/scheduler support."
 
 ### _R_ / _Bioconductor_ packages used
 
-List any _R_ / _Bioconductor_ packages that will be explicitly covered.
+* [`systemPipeR`](http://www.bioconductor.org/packages/release/bioc/html/systemPipeR.html)
+* [`systemPipeRdata`](http://www.bioconductor.org/packages/release/data/experiment/html/systemPipeRdata.html)
+* [R Markdown tutorial](https://rmarkdown.rstudio.com/lesson-2.html)
 
 ### Time outline
 
-An example for a 45-minute workshop:
+1h 45m total
 
-| Activity                     | Time |
-|------------------------------|------|
-| Packages                     | 15m  |
-| Package Development          | 15m  |
-| Contributing to Bioconductor | 5m   |
-| Best Practices               | 10m  |
+| Activity                                                          | Time |
+|-------------------------------------------------------------------|------|
+| Introduction                                                      | 5m   |
+| Overview of *systemPipeR* package                                 | 10m  |
+| Introduction to new S4 class: `SYSargs2` and `SYSargsList`        | 20m  |
+| Showcase small RNA-Seq workflow                                   | 30m  |
+| Building a custom workflow                                        | 30m  |
+| Parallelization on single machines and clusters                   | 10m  |
 
-### Workshop goals and objectives
+# Workshop goals and objectives
 
-List "big picture" student-centered workshop goals and learning
-objectives. Learning goals and objectives are related, but not the
-same thing. These goals and objectives will help some people to decide
-whether to attend the conference for training purposes, so please make
-these as precise and accurate as possible.
+## Learning goals
 
-*Learning goals* are high-level descriptions of what
-participants will learn and be able to do after the workshop is
-over. *Learning objectives*, on the other hand, describe in very
-specific and measurable terms specific skills or knowledge
-attained. The [Bloom's Taxonomy](#bloom) may be a useful framework
-for defining and describing your goals and objectives, although there
-are others.
+* Recognize the benefits of generic R-based workflow construction environment that is both scalable and reproducible 
+* Integration of command-line tools via the CWL community standard
+* Rendering of R markdown reports and critical assessment of scientific analysis reports
+* Parallelization of big data analysis tasks
 
-### Learning goals
+## Learning objectives
 
-Some examples:
-
-* describe how to...
-* identify methods for...
-* understand the difference between...
-
-### Learning objectives
-
-* analyze xyz data to produce...
-* create xyz plots
-* evaluate xyz data for artifacts
+* Identify and practice how to make analysis workflows more robust, reproducible and portable across heterogeneous computing systems
+* Usage of new workflow control class 
+* Optimize and debug workflows 
+* Inspection of technical reports and log files 
+* Design of new and fully customized workflows 
 
 ## Workshop
 
-Divide the workshop into sections (`## A Section`). Include
-fully-evaluated _R_ code chunks. Develop exercises and solutions, and
-anticipate that your audience will walk through the code with you, or
-work on the code idependently -- do not be too ambitious in the
-material that you present.
+To be added!
 
+### Workshop setup with Docker
 
 
