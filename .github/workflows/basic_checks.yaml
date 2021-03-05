@@ -2,7 +2,7 @@ on: [push, pull_request]
 
 env:
   cache-version: v1
-  repo-name: dcassol/systempipeworkshop2021:bioc2021
+  repo-name: dcassol/systempipeworkshop2021
 
 jobs:
   job1:
@@ -75,4 +75,4 @@ jobs:
           repository: ${{ env.repo-name }}
           tag_with_ref: true
           tag_with_sha: true
-          tags: latest
+          tags: bioc2021
