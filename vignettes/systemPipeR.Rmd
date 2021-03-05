@@ -16,7 +16,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-# systemPipeR: a generic workflow design and reporting environment for analyzing large-scale omics data in R with built-in support for command-line software
+## systemPipeR: a generic workflow design and reporting environment for analyzing large-scale omics data in R with built-in support for command-line software
 
 **Authors**:
     Daniela Cassol (danielac@ucr.edu),
@@ -74,16 +74,16 @@ Here is the note: "Most likely, the final computer cluster example will be demon
 | Building a custom workflow                                        | 30m  |
 | Parallelization on single machines and clusters                   | 10m  |
 
-# Workshop goals and objectives
+## Workshop goals and objectives
 
-## Learning goals
+### Learning goals
 
 * Recognize the benefits of generic R-based workflow construction environment that is both scalable and reproducible 
 * Integration of command-line tools via the CWL community standard
 * Rendering of R markdown reports and critical assessment of scientific analysis reports
 * Parallelization of big data analysis tasks
 
-## Learning objectives
+### Learning objectives
 
 * Identify and practice how to make analysis workflows more robust, reproducible and portable across heterogeneous computing systems
 * Usage of new workflow control class 

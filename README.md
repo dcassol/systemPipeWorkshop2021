@@ -7,4 +7,5 @@
 # Key resources
 
 - Docker image: [Docker Hub](https://hub.docker.com/repository/dcassol/systempiperworkshop2021)
-- Workshop: [pgkdown website](https://dcassol.github.io/systemPipeWorkshop2021/)
+- Workshop: [pgkdown website](https://dcassol.github.io/systemPipeWorkshop2021/docs/articles/systemPipeR.html)
+
