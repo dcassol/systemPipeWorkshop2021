@@ -2,9 +2,8 @@ pandoc: 2.11.2
 pkgdown: 1.6.1
 pkgdown_sha: ~
 articles:
-  HOWTO_BUILD_WORKSHOP: HOWTO_BUILD_WORKSHOP.html
-  workshop_example: workshop_example.html
-last_built: 2021-03-01T20:11Z
+  systemPipeR: systemPipeR.html
+last_built: 2021-03-05T05:18Z
 urls:
   reference: https://dcassol/systemPipeWorkshop2021/reference
   article: https://dcassol/systemPipeWorkshop2021/articles
