@@ -91,23 +91,19 @@
 
     
     
-<div id="systempiper-a-generic-workflow-design-and-reporting-environment-for-analyzing-large-scale-omics-data-in-r-with-built-in-support-for-command-line-software" class="section level2">
+<div id="systempiper-a-generic-workflow-design-and-reporting-environment-in-r-with-built-in-support-for-command-line-software" class="section level2">
 <h2 class="hasAnchor">
-<a href="#systempiper-a-generic-workflow-design-and-reporting-environment-for-analyzing-large-scale-omics-data-in-r-with-built-in-support-for-command-line-software" class="anchor"></a>systemPipeR: a generic workflow design and reporting environment for analyzing large-scale omics data in R with built-in support for command-line software</h2>
+<a href="#systempiper-a-generic-workflow-design-and-reporting-environment-in-r-with-built-in-support-for-command-line-software" class="anchor"></a>systemPipeR: a generic workflow design and reporting environment in R with built-in support for command-line software</h2>
 <p><strong>Authors</strong>: Daniela Cassol (<a href="mailto:danielac@ucr.edu" class="email">danielac@ucr.edu</a>), Thomas Girke (<a href="mailto:thomas.girke@ucr.edu" class="email">thomas.girke@ucr.edu</a>).</p>
 <p><strong>Institution</strong>: Institute for Integrative Genome Biology, University of California, Riverside, California, USA.</p>
-<p><strong>Last modified</strong>: 4 March, 2021.</p>
-</div>
-<div id="overview" class="section level2">
-<h2 class="hasAnchor">
-<a href="#overview" class="anchor"></a>Overview</h2>
-<div id="description" class="section level3">
+<p><strong>Last modified</strong>: 8 March, 2021.</p>
+<div id="workshop-description" class="section level3">
 <h3 class="hasAnchor">
-<a href="#description" class="anchor"></a>Description</h3>
-<p>This workshop demonstrates the use of the <em>systemPipeR</em> package, focusing on the project’s major enhancements. <em>systemPipeR</em> establishes a versatile environment for designing, building, and running end-to-end analysis workflows on local machines, HPC clusters, and cloud systems while generating at the same time publication-quality analysis reports. The package offers sufficient flexibility to choose each step in a workflow the optimal R or command-line software, customize the pre-configured workflow templates, and design entirely new ones while taking advantage of central community S4 classes Bioconductor ecosystem. <em>systemPipeR</em> new features allow users to visualize workflow designs in different graphical layouts, execute workflows step-wise or entirely from within R or other languages (e.g., Bash), monitor their run status while tracking all metadata associated with a project, and subsequently generate both scientific and technical status reports. The introduction of the workshop will provide an overview of systemPipeR’s command-line interface based on CWL (Common Workflow Language), as well as the new workflow control class (S4) added to the <em>systemPipeR</em> package, allowing users to execute single or any number of complex workflow steps with a single R command, such as <code>runWF(args[1:3])</code>. Simultaneously, the hand-on components will cover the basic usage of a pre-configured workflow template provided by the <em>systemPipeRdata</em> package and the customization and demonstration of the construction of new workflows. A short use-case demonstration will guide users through a basic small-RNA-Seq profiling workflow that will include reading mappings with variable parameter settings of two popular short-read aligners (HISAT2 and STAR), read quantification and statistical analyses steps as well as automation routines for running NGS workflows from start to finish with a single command. The last part will demonstrate how to parallelize the analysis of relatively large NGS data sets on multiple CPU cores of single machines as well as computer clusters with a scheduler (e.g., Slurm).</p>
-<blockquote>
-<p><strong><em>Dani note::</em></strong> Do you think we should add a demonstration of systemPipeShiny here?</p>
-</blockquote>
+<a href="#workshop-description" class="anchor"></a>Workshop Description</h3>
+<p>This workshop demonstrates the use of the <em>systemPipeR</em> package to designing, configuring, and running end-to-end reproducible analysis workflows while generating, at the same time, publication-quality analysis reports.</p>
+<p>The introduction of the workshop will provide an overview of <em>systemPipeR</em> components. We will help participants understand the package’s components environment, such as built-in support for command-line software, integrating individual software components, and the flexibility to choose and run each step in a workflow while monitoring its execution status and tracking all metadata associated with a project. We will explore the latter, with the new workflow control class (S4) added to the <em>systemPipeR</em> package, allowing users to execute single or any number of complex workflow steps with a single R command, such as <code>runWF(args[1:3])</code>.</p>
+<p>Simultaneously, the hand-on components will cover the basic usage of a pre-configured workflow template provided by the <em>systemPipeRdata</em> package and the customization and demonstration of the construction of new workflows. A short use-case demonstration will guide users through a basic small-RNA-Seq profiling workflow that will include reading mappings with variable parameter settings of two popular short-read aligners (HISAT2 and STAR), read quantification and statistical analyses steps as well as automation routines for running NGS workflows from start to finish with a single command. The last part will demonstrate how to parallelize the analysis of relatively large NGS data sets on multiple CPU cores of single machines as well as computer clusters with a scheduler (e.g., Slurm).</p>
+<p>This workshop demonstrates the use of the <em>systemPipeR</em> package, focusing on the project’s major enhancements. <em>systemPipeR</em> establishes a versatile environment for designing, building, and running end-to-end analysis workflows on local machines, HPC clusters, and cloud systems while generating at the same time publication-quality analysis reports. The package offers sufficient flexibility to choose each step in a workflow the optimal R or command-line software, customize the pre-configured workflow templates, and design entirely new ones while taking advantage of central community S4 classes Bioconductor ecosystem. <em>systemPipeR</em> new features allow users to visualize workflow designs in different graphical layouts, execute workflows step-wise or entirely from within R or other languages (e.g., Bash), monitor their run status while tracking all metadata associated with a project, and subsequently generate both scientific and technical status reports.</p>
 </div>
 <div id="pre-requisites" class="section level3">
 <h3 class="hasAnchor">
@@ -128,9 +124,6 @@
 <h3 class="hasAnchor">
 <a href="#workshop-participation" class="anchor"></a>Workshop Participation</h3>
 <p>Participants will be able to perform all analysis components of this workshop hands-on. Active user participation throughout the event is highly encouraged including but not limited to lecture material, hands-on sections and final discussion about package improvements. Participants are encouraged to ask questions at any time during the workshop.</p>
-<blockquote>
-<p><strong><em>Dani note::</em></strong> In the 2019 proposal, we added a note saying that the parallelization will be only a demonstration, but now the entire workshop is provided in a docker container, so I believe we can install slurm into the container. Here is the note: “Most likely, the final computer cluster example will be demonstrated by the presenter rather than performed by all participants, because the AMI instances provided during the conference are unlikely to provide cluster/scheduler support.”</p>
-</blockquote>
 </div>
 <div id="r-bioconductor-packages-used" class="section level3">
 <h3 class="hasAnchor">
@@ -208,7 +201,6 @@
 <div id="workshop" class="section level2">
 <h2 class="hasAnchor">
 <a href="#workshop" class="anchor"></a>Workshop</h2>
-<p>To be added!</p>
 <div id="workshop-setup-with-docker" class="section level3">
 <h3 class="hasAnchor">
 <a href="#workshop-setup-with-docker" class="anchor"></a>Workshop setup with Docker</h3>

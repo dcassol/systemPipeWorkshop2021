@@ -3,7 +3,7 @@ pkgdown: 1.6.1
 pkgdown_sha: ~
 articles:
   systemPipeR: systemPipeR.html
-last_built: 2021-03-05T05:18Z
+last_built: 2021-03-08T19:46Z
 urls:
   reference: https://dcassol/systemPipeWorkshop2021/reference
   article: https://dcassol/systemPipeWorkshop2021/articles
