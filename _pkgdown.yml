@@ -1,4 +1,4 @@
-url: https://dcassol/systemPipeWorkshop2021
+url: https://systempipe.org/systemPipeWorkshop2021
 
 template:
   params:
@@ -8,11 +8,13 @@ template:
 home:
   title: "systemPipeWorkshop2021"
   type: inverse
-
+  links:
+  - text: Download from Github
+    href: https://github.com/systemPipeR/systemPipeWorkshop2021/
+  - text: Report a bug
+    href: https://github.com/systemPipeR/systemPipeWorkshop2021/issues
 
 navbar:
   right:
    - icon: fa-github
-     href: https://github.com/dcassol/systemPipeWorkshop2021
-     
-
+     href: https://github.com/systemPipeR/systemPipeWorkshop2021

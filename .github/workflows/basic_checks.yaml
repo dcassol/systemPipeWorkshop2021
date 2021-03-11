@@ -2,7 +2,7 @@ on: [push, pull_request]
 
 env:
   cache-version: v1
-  repo-name: dcassol/systempipeworkshop2021
+  repo-name: systempipe/systempipeworkshop2021
 
 jobs:
   job1:
