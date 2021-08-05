@@ -22,6 +22,8 @@ jobs:
       - uses: r-lib/actions/setup-r@v1
       - name: Install dependencies
         run: |
+          options(repos = c(CRAN = "https://cran.r-project.org"))
+          BiocManager::repositories()
           install.packages(c("remotes", "rcmdcheck"))
           remotes::install_deps(dependencies = TRUE)
         shell: Rscript {0}
