@@ -1,34 +1,64 @@
-# For help debugging build failures open an issue on the RStudio community with the 'github-actions' tag.
-# https://community.rstudio.com/new-topic?category=Package%20development&tags=github-actions
-on:
-  push:
-    branches:
-      - main
-      - master
-  pull_request:
-    branches:
-      - main
-      - master
+on: [push, pull_request]
 
-name: R-CMD-check
+env:
+  cache-version: v1
+  repo-name: dcassol/systempipeworkshop2021
 
 jobs:
-  R-CMD-check:
+  job1:
     runs-on: ubuntu-latest
-    env:
-      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+    container: bioconductor/bioconductor_docker:devel
     steps:
-      - uses: actions/checkout@v2
-      - uses: r-lib/actions/setup-r@v1
+      - uses: actions/checkout@v1
+
+      # This lets us augment with additional dependencies
+      - name: Install system dependencies
+        if: runner.os == 'Linux'
+        env:
+          RHUB_PLATFORM: linux-x86_64-ubuntu-gcc
+        run: |
+          Rscript -e "remotes::install_github('r-hub/sysreqs')"
+          sysreqs=$(Rscript -e "cat(sysreqs::sysreq_commands('DESCRIPTION'))")
+          sudo -s eval "$sysreqs"
+          
       - name: Install dependencies
         run: |
           options(repos = c(CRAN = "https://cran.r-project.org"))
           BiocManager::repositories()
-          install.packages(c("remotes", "rcmdcheck"))
-          remotes::install_deps(dependencies = TRUE)
+          remotes::install_deps(dependencies = TRUE, repos = BiocManager::repositories())
+          remotes::install_cran("rcmdcheck")
+          remotes::install_github("tgirke/systemPipeR", force=TRUE)
+          remotes::install_github("tgirke/systemPipeRdata", force=TRUE)
         shell: Rscript {0}
+
       - name: Check
-        run: |
-          options(crayon.enabled = TRUE)
-          rcmdcheck::rcmdcheck(args = "--no-manual", error_on = "error")
+        env:
+          _R_CHECK_CRAN_INCOMING_REMOTE_: false
+        run: rcmdcheck::rcmdcheck(args = c("--no-manual"), error_on = "warning", check_dir = "check")
         shell: Rscript {0}
+      
+
+      - name: Build pkgdown
+        run: |
+           PATH=$PATH:$HOME/bin/ Rscript -e 'pkgdown::build_site(".")'
+      # deploy needs rsync? Seems so.
+      - name: Install deploy dependencies
+        run: |
+          apt-get update
+          apt-get -y install rsync
+      - name: Deploy 🚀
+        uses: JamesIves/github-pages-deploy-action@releases/v3
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          BRANCH: gh-pages # The branch the action should deploy to.
+          FOLDER: docs # The folder the action should deploy.
+
+      - uses: docker/build-push-action@v1
+        with:
+          username: ${{ secrets.DOCKER_HUB_USERNAME }}
+          password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
+          # Use the environment variable on first few lines to set repo name--just centralizes changes
+          repository: ${{ env.repo-name }}
+          tag_with_ref: true
+          tag_with_sha: true
+          tags: bioc2021
