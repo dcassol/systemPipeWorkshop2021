@@ -1,5 +1,6 @@
 <!-- badges: start -->
 [![.github/workflows/basic_checks.yaml](https://github.com/systemPipeR/systemPipeWorkshop2021/actions/workflows/basic_checks.yaml/badge.svg)](https://github.com/systemPipeR/systemPipeWorkshop2021/actions/workflows/basic_checks.yaml)
+[![R-CMD-check](https://github.com/dcassol/systemPipeWorkshop2021/workflows/R-CMD-check/badge.svg)](https://github.com/dcassol/systemPipeWorkshop2021/actions)
 <!-- badges: end -->
 
 # systemPipe: Workflow and Visualization Toolkit <img src="https://raw.githubusercontent.com/systemPipeR/systemPipeR.github.io/main/static/images/systemPipe_logo.png" align="right" width="280" height="288">
