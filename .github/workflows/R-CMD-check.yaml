@@ -2,7 +2,7 @@ on: [push, pull_request]
 
 env:
   cache-version: v1
-  repo-name: dcassol/systempipeworkshop2021
+  repo-name: systempipe/systempipeworkshop2021
 
 jobs:
   job1:
@@ -11,6 +11,30 @@ jobs:
     steps:
       - uses: actions/checkout@v1
 
+      - name: Query dependencies and update old packages
+        run: |
+          BiocManager::install(ask=FALSE)
+          saveRDS(remotes::dev_package_deps(dependencies = TRUE), ".github/depends.Rds", version = 2)
+        shell: Rscript {0}
+        
+      - name: Cache R packages
+        if: runner.os != 'Windows'
+        uses: actions/cache@v1
+        with:
+          path: /usr/local/lib/R/site-library
+          key: ${{ env.cache-version }}-${{ runner.os }}-r-${{ hashFiles('.github/depends.Rds') }}
+          restore-keys: ${{ env.cache-version }}-${{ runner.os }}-r-
+
+      # This lets us augment with additional dependencies
+      - name: Install system dependencies
+        if: runner.os == 'Linux'
+        env:
+          RHUB_PLATFORM: linux-x86_64-ubuntu-gcc
+          GITHUB_PAT: ${{ secrets.ws_test }}
+        run: |
+          Rscript -e "remotes::install_github('r-hub/sysreqs')"
+          sysreqs=$(Rscript -e "cat(sysreqs::sysreq_commands('DESCRIPTION'))")
+          sudo -s eval "$sysreqs"
           
       - name: Install dependencies
         run: |
@@ -32,11 +56,13 @@ jobs:
       - name: Build pkgdown
         run: |
            PATH=$PATH:$HOME/bin/ Rscript -e 'pkgdown::build_site(".")'
+
       # deploy needs rsync? Seems so.
       - name: Install deploy dependencies
         run: |
           apt-get update
           apt-get -y install rsync
+
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@releases/v3
         with:
