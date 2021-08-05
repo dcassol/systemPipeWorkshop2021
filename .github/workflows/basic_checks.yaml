@@ -2,7 +2,7 @@ on: [push, pull_request]
 
 env:
   cache-version: v1
-  repo-name: systempipe/systempipeworkshop2021
+  repo-name: dcassol/systempipeworkshop2021
 
 jobs:
   job1:
@@ -41,6 +41,8 @@ jobs:
           BiocManager::repositories()
           remotes::install_deps(dependencies = TRUE, repos = BiocManager::repositories())
           remotes::install_cran("rcmdcheck")
+          remotes::install_github("tgirke/systemPipeR", force=TRUE)
+          remotes::install_github("tgirke/systemPipeRdata", force=TRUE)
         shell: Rscript {0}
 
       - name: Check
