@@ -15,7 +15,8 @@ jobs:
       - name: Install dependencies
         run: |
           options(repos = c(CRAN = "https://cran.r-project.org"))
-          BiocManager::repositories()          remotes::install_github("tgirke/systemPipeR", force=TRUE)
+          BiocManager::repositories()         
+          remotes::install_github("tgirke/systemPipeR", force=TRUE)
         shell: Rscript {0}
 
       - name: Build pkgdown
