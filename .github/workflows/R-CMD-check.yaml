@@ -15,19 +15,8 @@ jobs:
       - name: Install dependencies
         run: |
           options(repos = c(CRAN = "https://cran.r-project.org"))
-          BiocManager::repositories()
-          remotes::install_deps(dependencies = TRUE, repos = BiocManager::repositories())
-          remotes::install_cran("rcmdcheck")
-          remotes::install_github("tgirke/systemPipeR", force=TRUE)
-          remotes::install_github("tgirke/systemPipeRdata", force=TRUE)
+          BiocManager::repositories()          remotes::install_github("tgirke/systemPipeR", force=TRUE)
         shell: Rscript {0}
-
-      - name: Check
-        env:
-          _R_CHECK_CRAN_INCOMING_REMOTE_: false
-        run: rcmdcheck::rcmdcheck(args = c("--no-manual"), error_on = "warning", check_dir = "check")
-        shell: Rscript {0}
-      
 
       - name: Build pkgdown
         run: |
